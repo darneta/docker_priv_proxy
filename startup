@@ -28,6 +28,8 @@ $ip = inet_ntoa(inet_aton($name));
 # before initiating connection. Each time the connection is terminated
 # wait for a new one.
 system("socat TCP-LISTEN:$PORT,fork TCP:$ip:$PORT &");
+# udp support
+system("socat UDP-LISTEN:$PORT,fork UDP:$ip:$PORT &");
 
 # Tail the logs, so that if the container dies, the proxy dies too
 system("docker logs -f $name");
